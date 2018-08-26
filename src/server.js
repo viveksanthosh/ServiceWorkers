@@ -12,7 +12,7 @@ server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/worker.js', (req, res) => {
-    res.set({ "Service-Worker": "script", "Service-Worker-Allowed": "/" });
+    res.set({ "Service-Worker": "script", "Service-Worker-Allowed": "/", "Content-Type": "text/javascript	" });
     let file = readFileSync('./src/worker.js', 'utf-8');
     res.status(200).send(file)
 
@@ -31,6 +31,9 @@ server
         <meta charset="utf-8" />
         <title>Welcome to Razzle</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+        navigator.serviceWorker.register('worker.js').then(e => console.log('registered')).catch(console.log)
+        </script>
         ${
       assets.client.css
         ? `<link rel="stylesheet" href="${assets.client.css}">`
@@ -46,8 +49,6 @@ server
         : `<script src="${assets.client.js}" defer crossorigin></script>
             `
       }
-        <script src='/worker.js' async ><script>
-
     </body>
 </html>`
     );
