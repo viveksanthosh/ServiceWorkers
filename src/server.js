@@ -1,7 +1,6 @@
 import App from './App';
 import React from 'react';
 import { readFileSync } from 'fs'
-import { StaticRouter } from 'react-router-dom';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
 
