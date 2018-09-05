@@ -1,6 +1,7 @@
 self.addEventListener('install', (e => {
    self.skipWaiting(); //forces update
-    console.log('instaled')
+    console.log('instal')
+    e.waitUntil(new Promise(r => {console.log(12); r();})) // stalls next step till promise is resolved
 }))
 
 self.addEventListener('activate', (e => {
